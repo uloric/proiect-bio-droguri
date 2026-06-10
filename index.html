@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Substance Effect Simulator — Anti-Drug Awareness</title>
+<title>Simulator Efecte Substanțe — Conștientizare Anti-Drog</title>
 <style>
   :root {
     --bg: #07080b;
@@ -36,7 +36,6 @@
     overflow: hidden;
   }
 
-  /* Hidden raw video, used as source for canvas */
   #video {
     position: absolute;
     inset: 0;
@@ -55,7 +54,6 @@
     display: block;
   }
 
-  /* Vignette overlay (for stimulant tunnel vision) */
   #vignette {
     position: absolute;
     inset: 0;
@@ -71,7 +69,6 @@
     mix-blend-mode: multiply;
   }
 
-  /* Red tint overlay for cannabis */
   #tint {
     position: absolute;
     inset: 0;
@@ -86,7 +83,6 @@
     mix-blend-mode: screen;
   }
 
-  /* Subtle film grain */
   #grain {
     position: absolute;
     inset: -20%;
@@ -206,10 +202,7 @@
     gap: 10px;
     width: 100%;
   }
-  .btn .icon {
-    font-size: 18px;
-    line-height: 1;
-  }
+  .btn .icon { font-size: 18px; line-height: 1; }
   .btn .name {
     font-size: 14px;
     font-weight: 700;
@@ -239,7 +232,6 @@
   .btn.active .name { color: var(--accent); }
   .btn.active .key  { border-color: rgba(110,231,183,0.4); color: var(--accent); }
 
-  /* Per-mode accent colors */
   .btn[data-mode="alcohol"].active     { background: rgba(255, 196, 84, 0.10); border-color: rgba(255, 196, 84, 0.45); }
   .btn[data-mode="alcohol"].active .name,
   .btn[data-mode="alcohol"].active .key { color: #ffc454; border-color: rgba(255, 196, 84, 0.45); }
@@ -354,11 +346,11 @@
 <!-- HUD -->
 <div class="hud-top" data-testid="hud-top">
   <span class="dot"></span>
-  <span class="title">SUBSTANCE EFFECT SIMULATOR · <b>Anti-Drug Awareness</b></span>
+  <span class="title">SIMULATOR EFECTE SUBSTANȚE · <b>Conștientizare Anti-Drog</b></span>
 </div>
 
 <div class="state-badge" data-testid="state-badge">
-  <span class="label">Current</span><span class="value" id="state-label">NORMAL</span>
+  <span class="label">Curent</span><span class="value" id="state-label">NORMAL (TREAZ)</span>
 </div>
 
 <!-- Control Panel -->
@@ -366,73 +358,66 @@
   <button class="btn active" data-mode="normal" data-testid="btn-normal">
     <div class="row">
       <span class="icon">🟢</span>
-      <span class="name">Normal</span>
+      <span class="name">Normal (Treaz)</span>
       <span class="key">1</span>
     </div>
-    <span class="desc">Sober · Baseline</span>
+    <span class="desc">Treaz · De bază</span>
   </button>
 
   <button class="btn" data-mode="alcohol" data-testid="btn-alcohol">
     <div class="row">
       <span class="icon">🍺</span>
-      <span class="name">Alcohol</span>
+      <span class="name">Alcool (Depresoare)</span>
       <span class="key">2</span>
     </div>
-    <span class="desc">Double vision · Trails</span>
+    <span class="desc">Vedere dublă · Urme</span>
   </button>
 
   <button class="btn" data-mode="hallucinogens" data-testid="btn-hallucinogens">
     <div class="row">
       <span class="icon">🍄</span>
-      <span class="name">Hallucinogens</span>
+      <span class="name">Halucinogene</span>
       <span class="key">3</span>
     </div>
-    <span class="desc">Hue shift · Melting</span>
+    <span class="desc">Schimbare nuanță · Topire</span>
   </button>
 
   <button class="btn" data-mode="stimulants" data-testid="btn-stimulants">
     <div class="row">
       <span class="icon">💊</span>
-      <span class="name">Stimulants</span>
+      <span class="name">Stimulente</span>
       <span class="key">4</span>
     </div>
-    <span class="desc">Jitter · Tunnel vision</span>
+    <span class="desc">Tremur · Vedere de tunel</span>
   </button>
 
   <button class="btn" data-mode="cannabis" data-testid="btn-cannabis">
     <div class="row">
       <span class="icon">🌿</span>
-      <span class="name">Cannabis</span>
+      <span class="name">Canabis</span>
       <span class="key">5</span>
     </div>
-    <span class="desc">Red eye · Slow zoom</span>
+    <span class="desc">Ochi roșii · Zoom lent</span>
   </button>
 </div>
 
-<div class="hint">Press 1 – 5 to switch · Esc to exit fullscreen</div>
+<div class="hint">Apasă 1 – 5 pentru a schimba · Esc pentru a ieși din fullscreen</div>
 
 <!-- Permission overlay -->
 <div class="overlay" id="overlay" data-testid="overlay">
   <div class="card">
-    <span class="tag">School Awareness Project</span>
-    <h1 id="ov-title">Camera Access Required</h1>
+    <span class="tag">Proiect Școlar de Conștientizare</span>
+    <h1 id="ov-title">Acces la Cameră Necesar</h1>
     <p id="ov-desc">
-      This simulator uses your webcam to demonstrate — in real time — how various
-      substances distort human perception. No video is recorded, transmitted, or stored.
-      Everything runs locally in your browser.
+      Acest simulator folosește camera web pentru a demonstra — în timp real — modul
+      în care diferite substanțe distorsionează percepția umană. Nu se înregistrează,
+      transmite sau stochează niciun videoclip. Totul rulează local în browserul tău.
     </p>
-    <button id="ov-btn" data-testid="start-btn">Allow Camera & Start</button>
+    <button id="ov-btn" data-testid="start-btn">Permite Camera & Pornește</button>
   </div>
 </div>
 
 <script>
-/* =========================================================
-   Substance Effect Simulator
-   - Pure single-file HTML/CSS/JS
-   - Webcam captured into <canvas> at requestAnimationFrame
-   - Effects: Normal, Alcohol, Hallucinogens, Stimulants, Cannabis
-   ========================================================= */
-
 const video    = document.getElementById('video');
 const canvas   = document.getElementById('canvas');
 const ctx      = canvas.getContext('2d', { willReadFrequently: false });
@@ -451,7 +436,6 @@ let currentMode  = 'normal';
 let stream       = null;
 let started      = false;
 
-/* ---------- Sizing ---------- */
 function resizeCanvas() {
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
   canvas.width  = Math.floor(window.innerWidth  * dpr);
@@ -462,23 +446,18 @@ function resizeCanvas() {
 window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
 
-/* ---------- Webcam ---------- */
 async function startCamera() {
   if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-    showError('Your browser does not support camera access. Please try Chrome, Edge or Firefox.');
+    showError('Browserul tău nu suportă accesul la cameră. Te rog folosește Chrome, Edge sau Firefox.');
     return;
   }
   try {
-    ovTitle.textContent = 'Requesting camera…';
-    ovDesc.textContent  = 'Please allow camera access in the browser prompt.';
+    ovTitle.textContent = 'Se solicită camera…';
+    ovDesc.textContent  = 'Te rog să permiți accesul la cameră pentru a porni simulatorul.';
     ovBtn.disabled = true;
 
     stream = await navigator.mediaDevices.getUserMedia({
-      video: {
-        width:  { ideal: 1280 },
-        height: { ideal: 720  },
-        facingMode: 'user'
-      },
+      video: { width: { ideal: 1280 }, height: { ideal: 720 }, facingMode: 'user' },
       audio: false
     });
     video.srcObject = stream;
@@ -489,26 +468,24 @@ async function startCamera() {
     requestAnimationFrame(loop);
   } catch (err) {
     console.error(err);
-    let msg = 'Camera access was denied or unavailable.';
-    if (err && err.name === 'NotAllowedError')  msg = 'Camera access was denied. Please allow it in the browser permissions and try again.';
-    if (err && err.name === 'NotFoundError')    msg = 'No camera detected on this device.';
-    if (err && err.name === 'NotReadableError') msg = 'Another application appears to be using the camera.';
+    let msg = 'Accesul la cameră a fost refuzat sau camera nu este disponibilă.';
+    if (err && err.name === 'NotAllowedError')  msg = 'Accesul la cameră a fost refuzat. Te rog permite-l din setările browserului și încearcă din nou.';
+    if (err && err.name === 'NotFoundError')    msg = 'Nu a fost detectată nicio cameră pe acest dispozitiv.';
+    if (err && err.name === 'NotReadableError') msg = 'Se pare că o altă aplicație folosește camera în acest moment.';
     showError(msg);
   }
 }
 
 function showError(msg) {
   overlay.classList.remove('hidden');
-  ovTitle.innerHTML = '<span class="err">Unable to start camera</span>';
+  ovTitle.innerHTML = '<span class="err">Eroare la accesarea camerei</span>';
   ovDesc.textContent = msg;
   ovBtn.disabled = false;
-  ovBtn.textContent = 'Retry';
+  ovBtn.textContent = 'Reîncearcă';
 }
 
 ovBtn.addEventListener('click', startCamera);
 
-/* ---------- Helpers ---------- */
-// Draw video to fully cover canvas (object-fit: cover behaviour)
 function drawCover(ctx2, src, dx, dy, dw, dh) {
   const vw = src.videoWidth  || 1280;
   const vh = src.videoHeight || 720;
@@ -517,21 +494,13 @@ function drawCover(ctx2, src, dx, dy, dw, dh) {
   const dAspect = dw / dh;
   let sx, sy, sw, sh;
   if (sAspect > dAspect) {
-    // source wider -> crop sides
-    sh = vh;
-    sw = vh * dAspect;
-    sx = (vw - sw) / 2;
-    sy = 0;
+    sh = vh; sw = vh * dAspect; sx = (vw - sw) / 2; sy = 0;
   } else {
-    sw = vw;
-    sh = vw / dAspect;
-    sx = 0;
-    sy = (vh - sh) / 2;
+    sw = vw; sh = vw / dAspect; sx = 0; sy = (vh - sh) / 2;
   }
   ctx2.drawImage(src, sx, sy, sw, sh, dx, dy, dw, dh);
 }
 
-// Offscreen buffer (for melting effect & double-buffering)
 const off = document.createElement('canvas');
 const offCtx = off.getContext('2d');
 function syncOffscreen() {
@@ -541,24 +510,28 @@ function syncOffscreen() {
   }
 }
 
-/* ---------- Mode switching ---------- */
+const MODE_LABELS = {
+  normal:        'NORMAL (TREAZ)',
+  alcohol:       'ALCOOL (DEPRESOARE)',
+  hallucinogens: 'HALUCINOGENE',
+  stimulants:    'STIMULENTE',
+  cannabis:      'CANABIS'
+};
+
 function setMode(mode) {
   if (!['normal','alcohol','hallucinogens','stimulants','cannabis'].includes(mode)) return;
   currentMode = mode;
   buttons.forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
-  stateLbl.textContent = mode.toUpperCase();
+  stateLbl.textContent = MODE_LABELS[mode] || mode.toUpperCase();
 
-  // Reset overlays
   vignette.style.opacity = (mode === 'stimulants') ? '1' : '0';
   tint.style.opacity     = (mode === 'cannabis')   ? '1' : '0';
 
-  // Reset canvas filter & composite for clean transitions
   ctx.filter = 'none';
   ctx.globalAlpha = 1;
   ctx.globalCompositeOperation = 'source-over';
   ctx.setTransform(1,0,0,1,0,0);
 
-  // Reset trails buffer
   trailsInitialized = false;
 }
 
@@ -578,18 +551,16 @@ function toggleFullscreen() {
   else document.exitFullscreen?.();
 }
 
-/* ---------- Render loop ---------- */
 let t0 = performance.now();
 let trailsInitialized = false;
 let lastAlcoholDraw = 0;
 
 function loop(now) {
   if (!started) return;
-  const t = (now - t0) / 1000; // seconds
+  const t = (now - t0) / 1000;
   const W = canvas.width;
   const H = canvas.height;
 
-  // Make sure video frame is ready
   if (video.readyState >= 2) {
     switch (currentMode) {
       case 'normal':        renderNormal(t, W, H); break;
@@ -602,7 +573,6 @@ function loop(now) {
   requestAnimationFrame(loop);
 }
 
-/* ===== 1. NORMAL ===== */
 function renderNormal(t, W, H) {
   ctx.setTransform(1,0,0,1,0,0);
   ctx.globalAlpha = 1;
@@ -612,27 +582,17 @@ function renderNormal(t, W, H) {
   drawCover(ctx, video, 0, 0, W, H);
 }
 
-/* ===== 2. ALCOHOL =====
-   - Persistent trails (low-alpha clear)
-   - Two offset copies (double vision) with oscillating shift
-   - Slight blur, sluggish frame feel
-*/
 function renderAlcohol(t, W, H) {
-  // Sluggish: cap effective updates to ~24 fps for a "drunken" frame feel
-  if (now - lastAlcoholDraw < 1000 / 28) {
-    // still keep trails fading slightly to avoid total freeze
-  }
+  if (now - lastAlcoholDraw < 1000 / 28) { /* keep fading */ }
   lastAlcoholDraw = now;
 
   ctx.setTransform(1,0,0,1,0,0);
 
-  // Persistent trail: fade existing frame instead of clearing
   ctx.globalCompositeOperation = 'source-over';
-  ctx.globalAlpha = 0.22; // amount of fade per frame -> longer trails when smaller
+  ctx.globalAlpha = 0.22;
   ctx.fillStyle = '#000';
   ctx.fillRect(0, 0, W, H);
 
-  // Draw video twice with oscillating offsets
   const osc1x =  Math.sin(t * 1.7) * (W * 0.018);
   const osc1y =  Math.cos(t * 1.3) * (H * 0.012);
   const osc2x = -Math.sin(t * 1.7 + 0.6) * (W * 0.022);
@@ -646,7 +606,6 @@ function renderAlcohol(t, W, H) {
   ctx.globalAlpha = 0.55;
   drawCover(ctx, video, osc2x, osc2y, W, H);
 
-  // reset
   ctx.globalCompositeOperation = 'source-over';
   ctx.globalAlpha = 1;
   ctx.filter = 'none';
@@ -654,44 +613,33 @@ function renderAlcohol(t, W, H) {
 let now = 0;
 (function tickClock(){ now = performance.now(); requestAnimationFrame(tickClock); })();
 
-/* ===== 3. HALLUCINOGENS =====
-   - Continuous hue rotation
-   - High saturation
-   - "Breathing" scale
-   - Wavy sine-displacement on horizontal slices
-*/
 function renderHallucinogens(t, W, H) {
   syncOffscreen();
   ctx.setTransform(1,0,0,1,0,0);
   ctx.clearRect(0, 0, W, H);
 
-  const hue        = (t * 90) % 360;          // fast hue cycle
-  const sat        = 220 + Math.sin(t * 1.4) * 40;
-  const breathe    = 1 + Math.sin(t * 0.9) * 0.04;
+  const hue     = (t * 90) % 360;
+  const sat     = 220 + Math.sin(t * 1.4) * 40;
+  const breathe = 1 + Math.sin(t * 0.9) * 0.04;
 
-  // Draw current frame onto offscreen (with filter + scale)
   offCtx.setTransform(1,0,0,1,0,0);
   offCtx.clearRect(0, 0, off.width, off.height);
   offCtx.filter = `hue-rotate(${hue}deg) saturate(${sat}%) contrast(1.05)`;
 
-  const sw = W * breathe;
-  const sh = H * breathe;
-  const sx = (W - sw) / 2;
-  const sy = (H - sh) / 2;
+  const sw = W * breathe, sh = H * breathe;
+  const sx = (W - sw) / 2, sy = (H - sh) / 2;
   drawCover(offCtx, video, sx, sy, sw, sh);
   offCtx.filter = 'none';
 
-  // Slice & sine-displace from offscreen onto main canvas
-  const sliceH = Math.max(2, Math.floor(H / 90)); // ~90 slices
+  const sliceH = Math.max(2, Math.floor(H / 90));
   const amp    = W * 0.025;
   for (let y = 0; y < H; y += sliceH) {
-    const phase  = (y / H) * Math.PI * 6;
-    const dx     = Math.sin(t * 2.0 + phase) * amp;
-    const dy     = Math.cos(t * 1.3 + phase * 0.7) * (amp * 0.35);
+    const phase = (y / H) * Math.PI * 6;
+    const dx    = Math.sin(t * 2.0 + phase) * amp;
+    const dy    = Math.cos(t * 1.3 + phase * 0.7) * (amp * 0.35);
     ctx.drawImage(off, 0, y, W, sliceH, dx, y + dy, W, sliceH);
   }
 
-  // Subtle chromatic glow
   ctx.globalCompositeOperation = 'screen';
   ctx.globalAlpha = 0.10;
   ctx.fillStyle = `hsl(${(hue + 180) % 360}, 90%, 50%)`;
@@ -700,11 +648,6 @@ function renderHallucinogens(t, W, H) {
   ctx.globalCompositeOperation = 'source-over';
 }
 
-/* ===== 4. STIMULANTS =====
-   - Jitter translate
-   - Blown-out contrast/brightness/saturation
-   - Tunnel vignette (CSS overlay handled separately)
-*/
 function renderStimulants(t, W, H) {
   ctx.setTransform(1,0,0,1,0,0);
   ctx.clearRect(0, 0, W, H);
@@ -712,7 +655,6 @@ function renderStimulants(t, W, H) {
   const jx = (Math.random() - 0.5) * (W * 0.012);
   const jy = (Math.random() - 0.5) * (H * 0.012);
 
-  // Slight scale up to hide edges during jitter
   const s = 1.06;
   const sw = W * s, sh = H * s;
   const sx = (W - sw) / 2 + jx;
@@ -722,41 +664,31 @@ function renderStimulants(t, W, H) {
   drawCover(ctx, video, sx, sy, sw, sh);
   ctx.filter = 'none';
 
-  // Occasional flash spike
   if (Math.random() < 0.03) {
     ctx.fillStyle = 'rgba(255,255,255,0.06)';
     ctx.fillRect(0, 0, W, H);
   }
 }
 
-/* ===== 5. CANNABIS =====
-   - Slow continuous zoom-in/out
-   - Edge blur (soft outside, sharper center) via radial mask
-   - Red eye tint via overlay
-*/
 function renderCannabis(t, W, H) {
   syncOffscreen();
   ctx.setTransform(1,0,0,1,0,0);
   ctx.clearRect(0, 0, W, H);
 
-  const zoom = 1.08 + Math.sin(t * 0.35) * 0.05; // slow breathing zoom
+  const zoom = 1.08 + Math.sin(t * 0.35) * 0.05;
   const sw = W * zoom, sh = H * zoom;
-  const sx = (W - sw) / 2;
-  const sy = (H - sh) / 2;
+  const sx = (W - sw) / 2, sy = (H - sh) / 2;
 
-  // 1) Blurred + slightly desaturated full image
   ctx.filter = 'blur(8px) saturate(1.15) brightness(0.95)';
   drawCover(ctx, video, sx, sy, sw, sh);
   ctx.filter = 'none';
 
-  // 2) Sharp center on offscreen
   offCtx.setTransform(1,0,0,1,0,0);
   offCtx.clearRect(0, 0, off.width, off.height);
   offCtx.filter = 'saturate(1.05) brightness(0.95)';
   drawCover(offCtx, video, sx, sy, sw, sh);
   offCtx.filter = 'none';
 
-  // Mask offscreen sharp copy with a radial gradient so only the center is visible
   offCtx.globalCompositeOperation = 'destination-in';
   const grad = offCtx.createRadialGradient(W/2, H/2, Math.min(W,H)*0.10, W/2, H/2, Math.min(W,H)*0.55);
   grad.addColorStop(0.0, 'rgba(0,0,0,1)');
@@ -766,16 +698,13 @@ function renderCannabis(t, W, H) {
   offCtx.fillRect(0, 0, off.width, off.height);
   offCtx.globalCompositeOperation = 'source-over';
 
-  // Composite sharp center over blurred background
   ctx.drawImage(off, 0, 0);
 
-  // Subtle warm wash (soft, lets the CSS red-eye overlay do most of the work)
   ctx.globalCompositeOperation = 'multiply';
   ctx.fillStyle = 'rgba(255, 220, 210, 0.55)';
   ctx.fillRect(0, 0, W, H);
   ctx.globalCompositeOperation = 'source-over';
 
-  // Slight overall droop in eyelids feel: tiny brightness lift at top
   ctx.globalCompositeOperation = 'multiply';
   const eyeGrad = ctx.createLinearGradient(0, 0, 0, H);
   eyeGrad.addColorStop(0.0, 'rgba(120, 70, 70, 0.55)');
@@ -787,7 +716,6 @@ function renderCannabis(t, W, H) {
   ctx.globalCompositeOperation = 'source-over';
 }
 
-/* ---------- Cleanup ---------- */
 window.addEventListener('beforeunload', () => {
   if (stream) stream.getTracks().forEach(track => track.stop());
 });
